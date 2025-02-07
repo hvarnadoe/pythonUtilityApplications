@@ -4,7 +4,9 @@ import pypdf
 from tkinter import ttk
 from tkinter.filedialog import askdirectory, askopenfilenames
 from tkinter import *
-
+'''
+pyinstaller --onefile --icon="pdf.ico" --noconsole --add-data="pdf.ico;." pdf_combiner.py
+'''
 class RearrangeableListbox(Listbox):
     def __init__(self, master, **kw):
         super().__init__(master, **kw)
@@ -33,7 +35,7 @@ class RearrangeableListbox(Listbox):
     def on_drop(self, event):
         self.curIndex = None
 
-top = Tk(className='PDF Merger Converter')
+top = Tk(className=' PDF Merger Converter')
 if getattr(sys, 'frozen', False):
     base_path = sys._MEIPASS
 else:    
@@ -51,6 +53,7 @@ mess = StringVar()
 top.geometry("500x500")
 
 def show(listbox):
+    mess.set('')
     global filenames
     filenames = askopenfilenames(filetypes=[("PDF Files", "*.pdf")])
     listbox.delete(0, END)
@@ -58,18 +61,13 @@ def show(listbox):
         listbox.insert(END, file)
 
 def select_folder():
+    mess.set('')
     destFolder.set(askdirectory())
-
-def print_file():
-    global filenames
-    mess.set(filenames.rsplit('.', 1)[0] + '.' + fileformat)
-
+    
 def merge():    
     merger = pypdf.PdfWriter()
     for pdf in filenames:
         merger.append(pdf)
-    
-    print(filenames[0].split('/')[-1])
     if newFileName.get():
         if destFolder.get():
             output = open(f'{destFolder.get()}/{newFileName.get()}.pdf', "wb")
@@ -80,6 +78,15 @@ def merge():
     else:
         output = open('merged_file.pdf', "wb")
     merger.write(output)
+    mess.set("Merge Completed")
+
+def update_label(*args):
+    label.config(text=mess.get())
+def update_dest(*args):
+    folderLabel.config(text=destFolder.get())
+
+mess.trace_add("write", update_label)
+destFolder.trace_add("write", update_dest)
 
 Button(top, text="Open PDFs", command=lambda: show(box)).place(x=50, y=50)
 Button(top, text="Select New Destination Folder", command=select_folder).place(x=50, y=75)
@@ -89,8 +96,18 @@ label = Label(
     top,
     text='Enter new file name',
 )
-label.place(x = 250, y = 50)
-entry.place(x=250, y=75)
+label.place(x= 250, y= 25)
+entry.place(x=250, y= 50)
+label = Label(
+    top,
+    text = mess.get()
+)
+label.place(x=150, y=105)
+folderLabel = Label(
+    top,
+    text = destFolder.get()
+)
+folderLabel.place(x= 250, y= 75)
 box = RearrangeableListbox(top, selectmode=SINGLE)
 box.place(x=0, y=150, relwidth=1, height=300)
 

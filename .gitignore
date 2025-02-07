@@ -1,0 +1,11 @@
+# Build Folders for the exe's
+*.spec
+
+/File Converter/build
+/File Converter/dist
+
+/PDF Combiner/build
+/PDF Combiner/dist
+
+/QR Generator/build
+/QR Generator/dist

@@ -21,9 +21,9 @@ foldername = ''
 mess = StringVar()
 
 top.geometry("500x500")
-
-#pyinstaller --onefile --icon="C:/dev/python/File Converter/photo_icon.ico" --noconsole --add-data="C:/dev/python/File Converter/photo_icon.ico;." file_converter.py
-
+'''
+pyinstaller --onefile --icon="photo_icon.ico" --noconsole --add-data="photo_icon.ico;." file_converter.py
+'''
 def show():
     global filenames
 
