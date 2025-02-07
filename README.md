@@ -1,8 +1,17 @@
-This is a coolection of three utility programs I created in python.
-File converter allows the user to import image and PDF files and convert the extension into various other formats.
-PDF Merger allows the user to merge PDFs together.
-QR Generator allows the user to generate QR codes.
+# Utility Programs Collection  
 
-All the applications were created to be incredibly simple and intuitive.
+This repository contains three simple and intuitive utility programs written in Python:  
 
-To use these programs you can either run the python files directly or can be packaged into a portable windows executable using pyinstaller by navigating to the source folder of the program you woulld like to compile in terminal and running the command found in the comments of each python file.
+- **File Converter** – Import image and PDF files and convert them into various formats.  
+- **PDF Merger** – Merge multiple PDF files into a single document.  
+- **QR Generator** – Generate QR codes with ease.  
+
+## Usage  
+
+You can use these programs in one of two ways:  
+
+1. **Run the Python files directly** – Simply execute the desired script using Python.  
+2. **Create a standalone Windows executable** – Use `pyinstaller` to package any program into a portable executable.  
+   - To do this, navigate to the source folder of the program you want to compile and run the `pyinstaller` command specified in the comments of each Python file.  
+
+
